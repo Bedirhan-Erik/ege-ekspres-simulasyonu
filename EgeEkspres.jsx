@@ -108,7 +108,6 @@ const TASKS = [
       hint: "Harfleri doğru sıraya koy: OGRISM / EGE ŞIRAÇ",
     },
     tasks: [
-      "QR kodu lokasyonda bul",
       "En az 4 kişiyle röportaj yap",
       "Röportaj görüntülerini düzenle",
       "Sokak röportajı haberini hazırla",
@@ -126,11 +125,11 @@ const TASKS = [
     endTime: "16:00",
     startHour: 15,
     endHour: 16,
-    location: "Fen Saha",
+    location: "Fen Fakültesi Futbol Sahası",
     locationEncrypted: null,
     locationPuzzle: {
-      type: "morse",
-      hint: "··· ·− ···· ·−    ··−· · −·\n(Morse kodunu çöz)",
+      type: "vowels",
+      hint: "Sesli harfler (a, e, ı, i, o, ö, u, ü) gizlendi — boşlukları tamamla",
     },
     tasks: [
       "Maç sonu röportajları yap",
@@ -149,7 +148,7 @@ const TASKS = [
 TASKS[0].locationEncrypted = caesarEncrypt(TASKS[0].location, 3);
 TASKS[1].locationEncrypted = "Ege MYO'nun kalbindeki yeşillik";
 TASKS[2].locationEncrypted = "OGRISM / EGE ŞIRAG";
-TASKS[3].locationEncrypted = "··· ·− ···· ·−  ··−· · −·";
+TASKS[3].locationEncrypted = "F_n F_k_lt_s_ F_tb_l S_h_s_";
 
 // ─── COMPONENTS ───
 
@@ -294,7 +293,7 @@ const PuzzleModal = ({ task, onSolve, onClose }) => {
                   ? "🧩 Bulmaca"
                   : task.locationPuzzle.type === "scramble"
                   ? "🔀 Harf Karışıklığı"
-                  : "📡 Morse Kodu"}
+                  : "🔤 Sesli Harfler Gizli"}
               </span>
               <h3>Lokasyonu Çöz</h3>
             </div>
