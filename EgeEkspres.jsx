@@ -61,6 +61,7 @@ const TASKS = [
       "Haber içeriğini hazırla",
       "Mizanpaj tasarımını oluştur",
       "Bilgi kartlarını hazırla",
+      "Haber küpürünü tasarla",
       "Haber simülasyonunu kaydet",
     ],
     driveLink: "https://drive.google.com/drive/folders/GOREV1_LINK",
@@ -129,11 +130,13 @@ const TASKS = [
     locationEncrypted: null,
     locationPuzzle: {
       type: "vowels",
-      hint: "Sesli harfler (a, e, ı, i, o, ö, u, ü) gizlendi — boşlukları tamamla",
+      hint: "Boşlukları doğru tamamla",
     },
     tasks: [
+      "Maç öncesi röportajları yap",
       "Maç sonu röportajları yap",
       "Taraftar röportajları kaydet",
+      "Maç içi görüntüleri çek",
       "Maç sonu fotoğraflarını çek",
       "Haber metni yaz",
       "Instagram tasarımını oluştur",
@@ -714,7 +717,7 @@ export default function App() {
               </button>
             </div>
             <div className="entry-footer">
-              <p>3635 • Ege Üniversitesi</p>
+              <p>2026 • Ege Üniversitesi</p>
             </div>
           </div>
         </div>
