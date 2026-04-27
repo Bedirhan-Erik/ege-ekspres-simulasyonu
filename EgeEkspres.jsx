@@ -152,7 +152,7 @@ const TASKS = [
 // Initialize encrypted locations
 TASKS[0].locationEncrypted = caesarEncrypt(TASKS[0].location, 3);
 TASKS[1].locationEncrypted = "Kampüsün saklı incisi";
-TASKS[2].locationEncrypted = "OGRISM / EGE ŞIRAG";
+TASKS[2].locationEncrypted = "EGE ŞIRAÇ / OGRISM ";
 TASKS[3].locationEncrypted = "F_n F_k_lt_s_ F_tb_l S_h_s_";
 
 // ─── COMPONENTS ───
