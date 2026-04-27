@@ -151,7 +151,7 @@ const TASKS = [
 
 // Initialize encrypted locations
 TASKS[0].locationEncrypted = caesarEncrypt(TASKS[0].location, 3);
-TASKS[1].locationEncrypted = "Ege MYO'nun kalbindeki yeşillik";
+TASKS[1].locationEncrypted = "Kampüsün saklı incisi";
 TASKS[2].locationEncrypted = "OGRISM / EGE ŞIRAG";
 TASKS[3].locationEncrypted = "F_n F_k_lt_s_ F_tb_l S_h_s_";
 
@@ -825,7 +825,7 @@ export default function App() {
       )}
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         /* ─────────────────────────────────────────
            RESET & BASE
         ───────────────────────────────────────── */
@@ -846,8 +846,8 @@ export default function App() {
           --border-bright: rgba(255,255,255,0.14);
           --text: #f0ede8;
           --muted: #6b6880;
-          --mono: 'Space Mono', monospace;
-          --sans: 'Syne', sans-serif;
+          --mono: 'JetBrains Mono', monospace;
+          --sans: 'Plus Jakarta Sans', sans-serif;
         }
 
         html { font-size: 16px; -webkit-text-size-adjust: 100%; }
