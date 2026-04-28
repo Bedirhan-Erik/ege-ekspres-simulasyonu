@@ -50,7 +50,7 @@ const TASKS = [
     endTime: "12:00",
     startHour: 11,
     endHour: 12,
-    location: "Acil Hipokrat Plus Kafe",
+    location: "Hipokrat Kafe",
     locationEncrypted: null, // will be set with puzzle
     locationPuzzle: {
       type: "caesar",
