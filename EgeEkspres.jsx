@@ -686,6 +686,13 @@ export default function App() {
     setTimeout(() => setShowConfetti(false), 3000);
   };
 
+  const handleReset = () => {
+    setSolvedLocations([]);
+    setVerifiedQRs([]);
+    setCompletedTasks([]);
+    setCompletedItems({});
+  };
+
   const allDone = completedTasks.length === TASKS.length;
 
   return (
@@ -797,6 +804,9 @@ export default function App() {
             <h2>Tebrikler!</h2>
             <p>Tüm görevleri başarıyla tamamladınız!</p>
             <p className="done-team">{teamName}</p>
+            <button className="reset-btn" onClick={handleReset}>
+              🔄 Baştan Başla
+            </button>
           </div>
         ) : (
           <div className="tasks-list">
@@ -1765,6 +1775,27 @@ export default function App() {
           margin-top: 0.75rem;
           letter-spacing: 0.1em;
         }
+        .reset-btn {
+          margin-top: 2rem;
+          background: rgba(59,130,246,0.1);
+          color: var(--red);
+          border: 1.5px solid rgba(59,130,246,0.3);
+          border-radius: 14px;
+          padding: 0.85rem 2rem;
+          font-family: var(--sans);
+          font-size: 0.95rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.2s;
+          min-height: 52px;
+          letter-spacing: 0.04em;
+        }
+        .reset-btn:hover {
+          background: rgba(59,130,246,0.2);
+          box-shadow: 0 6px 24px rgba(59,130,246,0.25);
+          transform: translateY(-2px);
+        }
+        .reset-btn:active { transform: scale(0.97); }
 
         /* ══════════════════════════════════════
            CONFETTI
