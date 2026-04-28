@@ -804,6 +804,10 @@ export default function App() {
             <h2>Tebrikler!</h2>
             <p>Tüm görevleri başarıyla tamamladınız!</p>
             <p className="done-team">{teamName}</p>
+            <div className="meetup-box">
+              <span className="meetup-label">📍 Toplanma Alanı</span>
+              <span className="meetup-place">Number One Kafe</span>
+            </div>
             <button className="reset-btn" onClick={handleReset}>
               🔄 Baştan Başla
             </button>
@@ -1774,6 +1778,30 @@ export default function App() {
           font-size: 1rem;
           margin-top: 0.75rem;
           letter-spacing: 0.1em;
+        }
+        .meetup-box {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.3rem;
+          margin-top: 1.75rem;
+          padding: 1rem 2rem;
+          background: rgba(59,130,246,0.08);
+          border: 1.5px solid rgba(59,130,246,0.25);
+          border-radius: 16px;
+        }
+        .meetup-label {
+          font-size: 0.65rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: var(--muted);
+        }
+        .meetup-place {
+          font-family: var(--mono);
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: var(--red);
+          letter-spacing: 0.08em;
         }
         .reset-btn {
           margin-top: 2rem;
