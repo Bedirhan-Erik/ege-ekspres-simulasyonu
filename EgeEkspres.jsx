@@ -64,7 +64,7 @@ const TASKS = [
       "Haber dijital arşivine yükle",
     ],
     driveLink: "https://drive.google.com/drive/u/0/folders/1oEzKLeVI1wua6Mbkg6temMXOmmOWpQOc?usp=sharing",
-    color: "#E63946",
+    color: "#3B82F6",
     qrCode: "11114380",
   },
   {
@@ -90,7 +90,7 @@ const TASKS = [
       "Kaza haberi metnini yaz",
     ],
     driveLink: "https://drive.google.com/drive/u/0/folders/1nHTTas0_7r-0J6bfpDNtfx_6NmHJ_4dt?usp=sharing",
-    color: "#457B9D",
+    color: "#6366F1",
     qrCode: "22223162",
   },
   {
@@ -116,7 +116,7 @@ const TASKS = [
       "Sokak röportajı haberini hazırla",
     ],
     driveLink: "https://drive.google.com/drive/folders/16bpRd9bHt2Ys1vvLIoUS1T2yU2M9eoOJ?usp=sharing",
-    color: "#2A9D8F",
+    color: "#06B6D4",
     qrCode: "33331621",
   },
   {
@@ -144,7 +144,7 @@ const TASKS = [
       "Instagram tasarımını oluştur",
     ],
     driveLink: "https://drive.google.com/drive/folders/1f7r_OL6ImsjI6exRi3pfo5BmReWGHx3n?usp=sharing",
-    color: "#E9C46A",
+    color: "#8B5CF6",
     qrCode: "44442035",
   },
 ];
@@ -735,7 +735,7 @@ export default function App() {
               style={{
                 left: `${Math.random() * 100}%`,
                 animationDelay: `${Math.random() * 0.5}s`,
-                backgroundColor: ["#E63946", "#457B9D", "#2A9D8F", "#E9C46A", "#F4A261"][
+                backgroundColor: ["#3B82F6", "#6366F1", "#06B6D4", "#8B5CF6", "#60A5FA"][
                   Math.floor(Math.random() * 5)
                 ],
               }}
@@ -833,19 +833,19 @@ export default function App() {
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-          --red: #E63946;
-          --red-dim: rgba(230,57,70,0.15);
-          --red-glow: rgba(230,57,70,0.35);
-          --teal: #2A9D8F;
-          --blue: #457B9D;
+          --red: #3B82F6;
+          --red-dim: rgba(59,130,246,0.15);
+          --red-glow: rgba(59,130,246,0.35);
+          --teal: #1D4ED8;
+          --blue: #60A5FA;
           --gold: #E9C46A;
-          --bg: #07070f;
-          --surface: #0f0f1a;
-          --surface2: #14142080;
-          --border: rgba(255,255,255,0.07);
-          --border-bright: rgba(255,255,255,0.14);
-          --text: #f0ede8;
-          --muted: #6b6880;
+          --bg: #05091A;
+          --surface: #0A1428;
+          --surface2: #0E1E3880;
+          --border: rgba(59,130,246,0.1);
+          --border-bright: rgba(59,130,246,0.22);
+          --text: #E8EEFF;
+          --muted: #5A7A9E;
           --mono: 'JetBrains Mono', monospace;
           --sans: 'Plus Jakarta Sans', sans-serif;
         }
@@ -868,7 +868,7 @@ export default function App() {
         }
         .particle {
           position: absolute;
-          background: radial-gradient(circle, rgba(230,57,70,0.6) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(59,130,246,0.6) 0%, transparent 70%);
           border-radius: 50%;
           animation: float linear infinite;
         }
@@ -907,13 +907,13 @@ export default function App() {
           font-size: 3.5rem;
           display: block;
           margin-bottom: 1.25rem;
-          filter: drop-shadow(0 0 24px rgba(230,57,70,0.5));
+          filter: drop-shadow(0 0 24px rgba(59,130,246,0.5));
           animation: pulse 3s ease-in-out infinite;
         }
 
         @keyframes pulse {
-          0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(230,57,70,0.4)); }
-          50%       { transform: scale(1.08); filter: drop-shadow(0 0 40px rgba(230,57,70,0.7)); }
+          0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(59,130,246,0.4)); }
+          50%       { transform: scale(1.08); filter: drop-shadow(0 0 40px rgba(59,130,246,0.7)); }
         }
 
         .logo-title {
@@ -970,7 +970,7 @@ export default function App() {
         .entry-input::placeholder { color: var(--muted); }
         .entry-input:focus {
           border-color: var(--red);
-          box-shadow: 0 0 0 3px rgba(230,57,70,0.12), 0 0 24px rgba(230,57,70,0.1);
+          box-shadow: 0 0 0 3px rgba(59,130,246,0.15), 0 0 24px rgba(59,130,246,0.12);
         }
 
         .entry-btn {
@@ -990,15 +990,15 @@ export default function App() {
         }
         .entry-btn:active { transform: scale(0.97); }
         .entry-btn:not(:disabled):hover {
-          background: #d62f3b;
-          box-shadow: 0 8px 32px rgba(230,57,70,0.45);
+          background: #2563EB;
+          box-shadow: 0 8px 32px rgba(59,130,246,0.45);
           transform: translateY(-2px);
         }
         .entry-btn:disabled { opacity: 0.25; cursor: not-allowed; }
 
         .entry-footer {
           margin-top: 2.5rem;
-          color: #2e2e3a;
+          color: #1a2a4a;
           font-family: var(--mono);
           font-size: 0.7rem;
           letter-spacing: 0.12em;
@@ -1021,7 +1021,7 @@ export default function App() {
           align-items: center;
           justify-content: space-between;
           padding: 0.85rem 1rem;
-          background: rgba(7,7,15,0.85);
+          background: rgba(5,9,26,0.88);
           backdrop-filter: blur(24px) saturate(1.4);
           -webkit-backdrop-filter: blur(24px) saturate(1.4);
           border-bottom: 1px solid var(--border);
@@ -1061,7 +1061,7 @@ export default function App() {
           width: 40px;
           height: 40px;
           border-radius: 50%;
-          border: 2px solid rgba(230,57,70,0.35);
+          border: 2px solid rgba(59,130,246,0.35);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -1069,7 +1069,7 @@ export default function App() {
           font-size: 0.72rem;
           font-weight: 700;
           color: var(--red);
-          background: rgba(230,57,70,0.06);
+          background: rgba(59,130,246,0.06);
         }
 
         .back-btn {
@@ -1130,11 +1130,11 @@ export default function App() {
           top: 17px;
           left: 18px;
           height: 2px;
-          background: linear-gradient(90deg, var(--red), #ff6b6b);
+          background: linear-gradient(90deg, var(--red), #60A5FA);
           transition: width 0.7s cubic-bezier(.4,0,.2,1);
           max-width: calc(100% - 36px);
           border-radius: 1px;
-          box-shadow: 0 0 8px rgba(230,57,70,0.5);
+          box-shadow: 0 0 8px rgba(59,130,246,0.5);
         }
         .progress-node {
           display: flex;
@@ -1304,8 +1304,8 @@ export default function App() {
 
         /* ── Timer ── */
         .timer-widget {
-          background: rgba(230,57,70,0.05);
-          border: 1px solid rgba(230,57,70,0.12);
+          background: rgba(59,130,246,0.06);
+          border: 1px solid rgba(59,130,246,0.15);
           border-radius: 14px;
           padding: 0.9rem 1rem;
           text-align: center;
@@ -1341,7 +1341,7 @@ export default function App() {
         .timer-sep {
           font-family: var(--mono);
           font-size: 1.3rem;
-          color: rgba(230,57,70,0.3);
+          color: rgba(59,130,246,0.35);
           margin-bottom: 0.7rem;
         }
         .timer-progress-bar {
@@ -1353,7 +1353,7 @@ export default function App() {
         }
         .timer-progress-fill {
           height: 100%;
-          background: linear-gradient(90deg, var(--red), #ff6b6b);
+          background: linear-gradient(90deg, var(--red), #60A5FA);
           border-radius: 2px;
           transition: width 1s linear;
         }
@@ -1371,8 +1371,8 @@ export default function App() {
           background: rgba(255,255,255,0.04);
         }
         .step-done {
-          border-color: rgba(42,157,143,0.3);
-          background: rgba(42,157,143,0.06);
+          border-color: rgba(29,78,216,0.35);
+          background: rgba(29,78,216,0.08);
         }
         .step-locked { opacity: 0.3; pointer-events: none; }
 
@@ -1427,7 +1427,7 @@ export default function App() {
           margin-left: 2.1rem;
           background: var(--red-dim);
           color: var(--red);
-          border: 1px solid rgba(230,57,70,0.28);
+          border: 1px solid rgba(59,130,246,0.3);
           border-radius: 10px;
           padding: 0.6rem 1.1rem;
           font-family: var(--sans);
@@ -1439,8 +1439,8 @@ export default function App() {
         }
         .action-btn:active { transform: scale(0.96); }
         .action-btn:hover {
-          background: rgba(230,57,70,0.22);
-          box-shadow: 0 4px 16px rgba(230,57,70,0.2);
+          background: rgba(59,130,246,0.22);
+          box-shadow: 0 4px 16px rgba(59,130,246,0.2);
         }
 
         /* ── Todo List ── */
@@ -1513,7 +1513,7 @@ export default function App() {
         .drive-btn:hover { background: rgba(66,133,244,0.18); transform: translateY(-1px); }
 
         .complete-btn {
-          background: linear-gradient(135deg, var(--teal), #22866e);
+          background: linear-gradient(135deg, #1D4ED8, #1E40AF);
           color: #fff;
           border: none;
           border-radius: 10px;
@@ -1525,10 +1525,10 @@ export default function App() {
           transition: all 0.2s;
           min-height: 48px;
           letter-spacing: 0.04em;
-          box-shadow: 0 4px 16px rgba(42,157,143,0.25);
+          box-shadow: 0 4px 16px rgba(29,78,216,0.35);
         }
         .complete-btn:active { transform: scale(0.97); }
-        .complete-btn:hover { box-shadow: 0 6px 24px rgba(42,157,143,0.4); transform: translateY(-2px); }
+        .complete-btn:hover { box-shadow: 0 6px 24px rgba(29,78,216,0.5); transform: translateY(-2px); }
 
         /* ══════════════════════════════════════
            MODALS
@@ -1552,7 +1552,7 @@ export default function App() {
         }
 
         .modal-content {
-          background: #13131e;
+          background: #08112A;
           border: 1px solid var(--border-bright);
           border-radius: 24px 24px 0 0;
           padding: 1.75rem 1.5rem 2.5rem;
@@ -1602,7 +1602,7 @@ export default function App() {
           gap: 0.3rem;
           background: var(--red-dim);
           color: var(--red);
-          border: 1px solid rgba(230,57,70,0.2);
+          border: 1px solid rgba(59,130,246,0.25);
           border-radius: 20px;
           padding: 0.3rem 0.8rem;
           font-size: 0.68rem;
@@ -1672,7 +1672,7 @@ export default function App() {
         .puzzle-input::placeholder { color: var(--muted); }
         .puzzle-input:focus {
           border-color: var(--red);
-          box-shadow: 0 0 0 3px rgba(230,57,70,0.1);
+          box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
         }
         .puzzle-submit {
           background: var(--red);
@@ -1689,7 +1689,7 @@ export default function App() {
           min-height: 48px;
         }
         .puzzle-submit:active { transform: scale(0.96); }
-        .puzzle-submit:hover { background: #d62f3b; }
+        .puzzle-submit:hover { background: #2563EB; }
 
         .puzzle-error {
           color: var(--red);
@@ -1760,7 +1760,7 @@ export default function App() {
         .all-done-screen p { color: var(--muted); font-size: 0.9rem; }
         .done-team {
           font-family: var(--mono);
-          color: var(--red);
+          color: var(--blue);
           font-size: 1rem;
           margin-top: 0.75rem;
           letter-spacing: 0.1em;
