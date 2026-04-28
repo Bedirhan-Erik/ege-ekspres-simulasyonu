@@ -445,7 +445,7 @@ const TaskCard = ({
   const [showQR, setShowQR] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
-  const canAccess = isUnlocked && !isTimedOut;
+  const canAccess = isUnlocked && (!isTimedOut || isCompleted);
   const allItemsDone = task.tasks.every((_, i) => completedItems.includes(i));
 
   const handleCardClick = () => {
@@ -485,6 +485,21 @@ const TaskCard = ({
 
         {canAccess && expanded && (
           <div className="task-card-body">
+            {isCompleted ? (
+              <div className="completed-drive-section">
+                <p className="completed-msg">✅ Görev tamamlandı</p>
+                <a
+                  href={task.driveLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="drive-btn"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  📁 Google Drive'a Yükle
+                </a>
+              </div>
+            ) : (
+            <>
             <Timer
               startedAt={startedAt}
               onExpire={() => onTimeOut(task.id)}
@@ -615,6 +630,8 @@ const TaskCard = ({
               )}
             </div>
 
+            </>
+            )}
           </div>
         )}
       </div>
@@ -1554,6 +1571,20 @@ export default function App() {
         .action-btn:hover {
           background: rgba(59,130,246,0.22);
           box-shadow: 0 4px 16px rgba(59,130,246,0.2);
+        }
+
+        /* ── Completed Drive Section ── */
+        .completed-drive-section {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.75rem;
+          padding: 0.5rem 0;
+        }
+        .completed-msg {
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: var(--teal);
         }
 
         /* ── Todo List ── */
