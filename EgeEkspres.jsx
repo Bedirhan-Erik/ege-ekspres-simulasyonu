@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { QRCodeSVG } from "qrcode.react";
+import { Html5Qrcode } from "html5-qrcode";
 
 // ─── CONFIG ───
 const TEAM_NAME_KEY = "ege_ekspres_team";
@@ -344,6 +345,42 @@ const QRModal = ({ task, onVerify, onClose }) => {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [verified, setVerified] = useState(false);
+  const [scanning, setScanning] = useState(false);
+  const scannerRef = useRef(null);
+
+  useEffect(() => {
+    if (!scanning) return;
+    const scanner = new Html5Qrcode("qr-scanner-view");
+    scannerRef.current = scanner;
+    scanner
+      .start(
+        { facingMode: "environment" },
+        { fps: 10, qrbox: { width: 220, height: 220 } },
+        (decoded) => {
+          setCode(decoded);
+          scanner.stop().then(() => setScanning(false)).catch(() => setScanning(false));
+        },
+        () => {}
+      )
+      .catch(() => setScanning(false));
+    return () => {
+      if (scanner.isScanning) scanner.stop().catch(() => {});
+    };
+  }, [scanning]);
+
+  useEffect(() => {
+    return () => {
+      if (scannerRef.current?.isScanning) scannerRef.current.stop().catch(() => {});
+    };
+  }, []);
+
+  const stopScan = () => {
+    if (scannerRef.current?.isScanning) {
+      scannerRef.current.stop().then(() => setScanning(false)).catch(() => setScanning(false));
+    } else {
+      setScanning(false);
+    }
+  };
 
   const check = () => {
     if (code.trim() === task.qrCode) {
@@ -368,10 +405,24 @@ const QRModal = ({ task, onVerify, onClose }) => {
         ) : (
           <>
             <div className="qr-header">
-              <div className="qr-icon-large">📱</div>
+              <div className="qr-icon-large">📷</div>
               <h3>QR Kod Doğrulama</h3>
-              <p>Lokasyondaki QR kodu okutun ve aldığınız kodu girin</p>
+              <p>Kameranızı QR koda tutun veya kodu manuel girin</p>
             </div>
+
+            {scanning ? (
+              <div className="scanner-wrapper">
+                <div id="qr-scanner-view" className="scanner-view" />
+                <button className="scan-cancel-btn" onClick={stopScan}>✕ İptal</button>
+              </div>
+            ) : (
+              <button className="scan-start-btn" onClick={() => setScanning(true)}>
+                📷 Kamera ile Tara
+              </button>
+            )}
+
+            <div className="scan-divider"><span>veya manuel gir</span></div>
+
             <div className="puzzle-input-group">
               <input
                 type="text"
@@ -1792,6 +1843,72 @@ export default function App() {
         .qr-icon-large { font-size: 2.8rem; display: block; margin-bottom: 0.5rem; }
         .qr-header h3 { font-size: 1.1rem; font-weight: 800; }
         .qr-header p { color: var(--muted); font-size: 0.8rem; margin-top: 0.4rem; line-height: 1.5; }
+
+        .scan-start-btn {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          background: var(--red-dim);
+          color: var(--red);
+          border: 1.5px solid rgba(59,130,246,0.3);
+          border-radius: 14px;
+          padding: 0.9rem;
+          font-family: var(--sans);
+          font-size: 0.95rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.2s;
+          min-height: 52px;
+          margin-bottom: 0.75rem;
+        }
+        .scan-start-btn:hover { background: rgba(59,130,246,0.22); }
+        .scan-start-btn:active { transform: scale(0.97); }
+
+        .scanner-wrapper {
+          position: relative;
+          margin-bottom: 0.75rem;
+          border-radius: 14px;
+          overflow: hidden;
+          background: #000;
+        }
+        .scanner-view { width: 100%; min-height: 260px; }
+        .scanner-view video { width: 100% !important; border-radius: 14px; }
+        #qr-scanner-view > * { border-radius: 14px !important; }
+
+        .scan-cancel-btn {
+          position: absolute;
+          top: 0.6rem;
+          right: 0.6rem;
+          background: rgba(0,0,0,0.6);
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          padding: 0.35rem 0.7rem;
+          font-size: 0.8rem;
+          font-weight: 700;
+          cursor: pointer;
+          z-index: 10;
+        }
+
+        .scan-divider {
+          text-align: center;
+          position: relative;
+          margin: 0.75rem 0;
+          color: var(--muted);
+          font-size: 0.72rem;
+        }
+        .scan-divider::before, .scan-divider::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          width: 38%;
+          height: 1px;
+          background: rgba(255,255,255,0.06);
+        }
+        .scan-divider::before { left: 0; }
+        .scan-divider::after { right: 0; }
 
         /* ══════════════════════════════════════
            ALL DONE
