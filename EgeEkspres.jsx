@@ -64,6 +64,7 @@ const TASKS = [
       "Haber dijital arşivine yükle",
     ],
     driveLink: "https://drive.google.com/drive/u/0/folders/1oEzKLeVI1wua6Mbkg6temMXOmmOWpQOc?usp=sharing",
+    mapLink: "https://www.google.com/maps/search/?api=1&query=Ege+Üniversitesi+İletişim+Fakültesi+Bornova+İzmir",
     color: "#3B82F6",
     qrCode: "11114380",
   },
@@ -90,6 +91,7 @@ const TASKS = [
       "Kaza haberi metnini yaz",
     ],
     driveLink: "https://drive.google.com/drive/u/0/folders/1nHTTas0_7r-0J6bfpDNtfx_6NmHJ_4dt?usp=sharing",
+    mapLink: "https://www.google.com/maps/search/?api=1&query=Ege+Meslek+Yüksekokulu+Bornova+İzmir",
     color: "#6366F1",
     qrCode: "22223162",
   },
@@ -116,6 +118,7 @@ const TASKS = [
       "Sokak röportajı haberini hazırla",
     ],
     driveLink: "https://drive.google.com/drive/folders/16bpRd9bHt2Ys1vvLIoUS1T2yU2M9eoOJ?usp=sharing",
+    mapLink: "https://www.google.com/maps/search/?api=1&query=Ege+Üniversitesi+Çarşı+Migros+Bornova+İzmir",
     color: "#06B6D4",
     qrCode: "33331621",
   },
@@ -144,6 +147,7 @@ const TASKS = [
       "Instagram tasarımını oluştur",
     ],
     driveLink: "https://drive.google.com/drive/folders/1f7r_OL6ImsjI6exRi3pfo5BmReWGHx3n?usp=sharing",
+    mapLink: "https://www.google.com/maps/search/?api=1&query=Ege+Üniversitesi+Fen+Fakültesi+Futbol+Sahası+Bornova+İzmir",
     color: "#8B5CF6",
     qrCode: "44442035",
   },
@@ -475,7 +479,18 @@ const TaskCard = ({
                   Bulmacayı Aç
                 </button>
               ) : (
-                <p className="step-result">📍 {task.location}</p>
+                <div className="location-solved-block">
+                  <p className="step-result">📍 {task.location}</p>
+                  <a
+                    href={task.mapLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="map-btn"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    🗺️ Haritada Aç
+                  </a>
+                </div>
               )}
             </div>
 
@@ -1431,6 +1446,33 @@ export default function App() {
           color: var(--teal);
           padding-left: 2.1rem;
           font-weight: 600;
+        }
+        .location-solved-block {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          flex-wrap: wrap;
+        }
+        .location-solved-block .step-result { margin-top: 0; }
+        .map-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.3rem;
+          background: rgba(59,130,246,0.1);
+          color: var(--red);
+          border: 1px solid rgba(59,130,246,0.25);
+          border-radius: 8px;
+          padding: 0.3rem 0.7rem;
+          font-family: var(--sans);
+          font-size: 0.75rem;
+          font-weight: 700;
+          text-decoration: none;
+          transition: all 0.2s;
+          white-space: nowrap;
+        }
+        .map-btn:hover {
+          background: rgba(59,130,246,0.2);
+          transform: translateY(-1px);
         }
 
         .action-btn {
