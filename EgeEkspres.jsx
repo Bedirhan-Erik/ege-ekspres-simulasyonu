@@ -59,6 +59,7 @@ const TASKS = [
     },
     tasks: [
       "Haber metnini hazırla",
+      "Haber fotoğraf ve videoları yüklenecek",
       "Mizanpaj tasarımını oluştur",
       "Haberi küpür formuna dönüştür",
       "Haber dijital arşivine yükle",
