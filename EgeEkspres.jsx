@@ -54,8 +54,8 @@ const TASKS = [
     locationEncrypted: null, // will be set with puzzle
     locationPuzzle: {
       type: "caesar",
-      shift: 3,
-      hint: "Her harfi alfabede 3 adım geri al",
+      shift: 1,
+      hint: "Her harfi alfabede 1 adım geri al",
     },
     tasks: [
       "Haber metnini hazırla",
@@ -154,7 +154,7 @@ const TASKS = [
 ];
 
 // Initialize encrypted locations
-TASKS[0].locationEncrypted = caesarEncrypt(TASKS[0].location, 3);
+TASKS[0].locationEncrypted = caesarEncrypt(TASKS[0].location, 1);
 TASKS[1].locationEncrypted = "Kampüsün saklı incisi";
 TASKS[2].locationEncrypted = "EGE ŞIRAÇ / OGRISM ";
 TASKS[3].locationEncrypted = "F_n F_k_lt_s_ F_tb_l S_h_s_";
