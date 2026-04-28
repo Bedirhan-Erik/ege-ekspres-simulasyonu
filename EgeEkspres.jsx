@@ -192,52 +192,33 @@ const Particles = () => {
   );
 };
 
-const Timer = ({ startTime, endTime, isActive }) => {
-  const [now, setNow] = useState(new Date());
+const Timer = ({ startedAt, onExpire }) => {
+  const [now, setNow] = useState(Date.now());
 
   useEffect(() => {
-    const iv = setInterval(() => setNow(new Date()), 1000);
+    const iv = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(iv);
   }, []);
 
-  const [sh, sm] = startTime.split(":").map(Number);
-  const [eh, em] = endTime.split(":").map(Number);
+  if (!startedAt) return null;
 
-  const start = new Date(now);
-  start.setHours(sh, sm, 0, 0);
-  const end = new Date(now);
-  end.setHours(eh, em, 0, 0);
-
-  const isBeforeStart = now < start;
-  const isPastEnd = now > end;
-  const remaining = isBeforeStart
-    ? Math.floor((start - now) / 1000)
-    : isPastEnd
-    ? 0
-    : Math.floor((end - now) / 1000);
+  const elapsed = Math.floor((now - startedAt) / 1000);
+  const remaining = Math.max(0, 3600 - elapsed);
+  const progress = Math.min((elapsed / 3600) * 100, 100);
+  const isUrgent = remaining > 0 && remaining <= 300;
 
   const h = Math.floor(remaining / 3600);
   const m = Math.floor((remaining % 3600) / 60);
   const s = remaining % 60;
   const pad = (n) => String(n).padStart(2, "0");
 
-  const totalDuration = (eh - sh) * 3600 + (em - sm) * 60;
-  const elapsed = isBeforeStart
-    ? 0
-    : isPastEnd
-    ? totalDuration
-    : totalDuration - Math.floor((end - now) / 1000);
-  const progress = Math.min((elapsed / totalDuration) * 100, 100);
+  useEffect(() => {
+    if (remaining === 0) onExpire?.();
+  }, [remaining]);
 
   return (
-    <div className={`timer-widget ${isActive ? "timer-active" : ""}`}>
-      <div className="timer-label">
-        {isBeforeStart
-          ? "Göreve Kalan"
-          : isPastEnd
-          ? "Süre Doldu"
-          : "Kalan Süre"}
-      </div>
+    <div className={`timer-widget ${isUrgent ? "timer-urgent" : ""}`}>
+      <div className="timer-label">{remaining === 0 ? "Süre Doldu" : "Kalan Süre"}</div>
       <div className="timer-digits">
         <span className="digit-group">
           <span className="digit">{pad(h)}</span>
@@ -254,11 +235,9 @@ const Timer = ({ startTime, endTime, isActive }) => {
           <span className="digit-label">sn</span>
         </span>
       </div>
-      {!isBeforeStart && !isPastEnd && (
-        <div className="timer-progress-bar">
-          <div className="timer-progress-fill" style={{ width: `${progress}%` }} />
-        </div>
-      )}
+      <div className="timer-progress-bar">
+        <div className="timer-progress-fill" style={{ width: `${progress}%` }} />
+      </div>
     </div>
   );
 };
@@ -450,6 +429,8 @@ const TaskCard = ({
   isUnlocked,
   isCurrent,
   isCompleted,
+  isTimedOut,
+  startedAt,
   locationSolved,
   qrVerified,
   completedItems,
@@ -457,19 +438,21 @@ const TaskCard = ({
   onVerifyQR,
   onToggleItem,
   onComplete,
+  onStartTimer,
+  onTimeOut,
 }) => {
   const [showPuzzle, setShowPuzzle] = useState(false);
   const [showQR, setShowQR] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
-  const now = new Date();
-  const [sh] = task.startTime.split(":").map(Number);
-  const startDate = new Date(now);
-  startDate.setHours(sh, 0, 0, 0);
-  const isTimeReached = now >= startDate;
-  const canAccess = isUnlocked && isTimeReached;
-
+  const canAccess = isUnlocked && !isTimedOut;
   const allItemsDone = task.tasks.every((_, i) => completedItems.includes(i));
+
+  const handleCardClick = () => {
+    if (!canAccess) return;
+    if (!expanded && !startedAt) onStartTimer(task.id);
+    setExpanded(!expanded);
+  };
 
   return (
     <>
@@ -478,7 +461,7 @@ const TaskCard = ({
           isCompleted ? "task-completed" : ""
         } ${!canAccess ? "task-locked" : ""}`}
         style={{ "--task-color": task.color }}
-        onClick={() => canAccess && setExpanded(!expanded)}
+        onClick={handleCardClick}
       >
         <div className="task-card-header">
           <div className="task-number">
@@ -488,20 +471,14 @@ const TaskCard = ({
             <h3>{task.title}</h3>
             <p className="task-subtitle">{task.subtitle}</p>
           </div>
-          <div className="task-time-badge">
-            <span>{task.startTime}</span>
-            <span className="time-dash">—</span>
-            <span>{task.endTime}</span>
-          </div>
+          <div className="task-time-badge">⏱ 1 saat</div>
         </div>
 
         {!canAccess && (
           <div className="task-locked-overlay">
             <span className="lock-icon">🔒</span>
             <span>
-              {!isUnlocked
-                ? "Önceki görevi tamamla"
-                : `${task.startTime}'de açılacak`}
+              {!isUnlocked ? "Önceki görevi tamamla" : "Süre doldu, görev kilitlendi"}
             </span>
           </div>
         )}
@@ -509,9 +486,8 @@ const TaskCard = ({
         {canAccess && expanded && (
           <div className="task-card-body">
             <Timer
-              startTime={task.startTime}
-              endTime={task.endTime}
-              isActive={isCurrent}
+              startedAt={startedAt}
+              onExpire={() => onTimeOut(task.id)}
             />
 
             {/* Step 1: Solve Location */}
@@ -686,6 +662,8 @@ export default function App() {
   const [verifiedQRs, setVerifiedQRs] = useState(saved.verifiedQRs || []);
   const [completedTasks, setCompletedTasks] = useState(saved.completedTasks || []);
   const [completedItems, setCompletedItems] = useState(saved.completedItems || {});
+  const [taskStartTimes, setTaskStartTimes] = useState(saved.taskStartTimes || {});
+  const [timedOutTasks, setTimedOutTasks] = useState(saved.timedOutTasks || []);
   const [showConfetti, setShowConfetti] = useState(false);
   const [pendingVerify, setPendingVerify] = useState(null);
 
@@ -694,9 +672,9 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem(
       "ege_state",
-      JSON.stringify({ teamName, entered, solvedLocations, verifiedQRs, completedTasks, completedItems })
+      JSON.stringify({ teamName, entered, solvedLocations, verifiedQRs, completedTasks, completedItems, taskStartTimes, timedOutTasks })
     );
-  }, [teamName, entered, solvedLocations, verifiedQRs, completedTasks, completedItems]);
+  }, [teamName, entered, solvedLocations, verifiedQRs, completedTasks, completedItems, taskStartTimes, timedOutTasks]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -753,11 +731,21 @@ export default function App() {
     setTimeout(() => setShowConfetti(false), 3000);
   };
 
+  const handleStartTimer = (taskId) => {
+    setTaskStartTimes((prev) => ({ ...prev, [taskId]: Date.now() }));
+  };
+
+  const handleTimeOut = (taskId) => {
+    setTimedOutTasks((prev) => prev.includes(taskId) ? prev : [...prev, taskId]);
+  };
+
   const handleReset = () => {
     setSolvedLocations([]);
     setVerifiedQRs([]);
     setCompletedTasks([]);
     setCompletedItems({});
+    setTaskStartTimes({});
+    setTimedOutTasks([]);
   };
 
   const allDone = completedTasks.length === TASKS.length;
@@ -889,6 +877,8 @@ export default function App() {
                 isUnlocked={index <= currentTaskIndex}
                 isCurrent={index === currentTaskIndex}
                 isCompleted={completedTasks.includes(task.id)}
+                isTimedOut={timedOutTasks.includes(task.id)}
+                startedAt={taskStartTimes[task.id] || null}
                 locationSolved={solvedLocations.includes(task.id)}
                 qrVerified={verifiedQRs.includes(task.id)}
                 completedItems={completedItems[task.id] || []}
@@ -896,6 +886,8 @@ export default function App() {
                 onVerifyQR={handleVerifyQR}
                 onToggleItem={handleToggleItem}
                 onComplete={handleComplete}
+                onStartTimer={handleStartTimer}
+                onTimeOut={handleTimeOut}
               />
             ))}
           </div>
@@ -1390,6 +1382,19 @@ export default function App() {
           border-radius: 14px;
           padding: 0.9rem 1rem;
           text-align: center;
+          transition: background 0.5s, border-color 0.5s;
+        }
+        .timer-urgent {
+          background: rgba(239,68,68,0.08);
+          border-color: rgba(239,68,68,0.3);
+          animation: urgentPulse 1s ease-in-out infinite;
+        }
+        .timer-urgent .digit { color: #EF4444; }
+        .timer-urgent .timer-sep { color: rgba(239,68,68,0.4); }
+        .timer-urgent .timer-progress-fill { background: linear-gradient(90deg, #EF4444, #F87171); }
+        @keyframes urgentPulse {
+          0%,100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.2); }
+          50%      { box-shadow: 0 0 0 6px rgba(239,68,68,0); }
         }
         .timer-label {
           font-size: 0.6rem;
