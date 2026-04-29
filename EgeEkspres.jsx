@@ -599,14 +599,14 @@ const TaskCard = ({
             {/* Step 4: Upload & Complete */}
             <div
               className={`task-step ${
-                allItemsDone && qrVerified ? "step-active" : "step-locked"
+                qrVerified ? "step-active" : "step-locked"
               }`}
             >
               <div className="step-header">
                 <span className="step-num">4</span>
                 <span>Teslim Et</span>
               </div>
-              {allItemsDone && qrVerified && (
+              {qrVerified && (
                 <div className="upload-section">
                   <a
                     href={task.driveLink}
