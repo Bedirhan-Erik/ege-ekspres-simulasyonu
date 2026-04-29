@@ -684,7 +684,10 @@ export default function App() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [pendingVerify, setPendingVerify] = useState(null);
 
-  const currentTaskIndex = completedTasks.length;
+  const firstActiveIndex = TASKS.findIndex(
+    (t) => !completedTasks.includes(t.id) && !timedOutTasks.includes(t.id)
+  );
+  const currentTaskIndex = firstActiveIndex === -1 ? TASKS.length : firstActiveIndex;
 
   useEffect(() => {
     localStorage.setItem(
@@ -833,6 +836,7 @@ export default function App() {
         </div>
         <div className="header-right">
           <button className="back-btn" onClick={() => setEntered(false)}>← Geri</button>
+          <button className="reset-header-btn" onClick={() => { if (window.confirm("Oyunu sıfırlamak istediğinden emin misin?")) handleReset(); }}>↺ Sıfırla</button>
           <div className="progress-ring">
             <span>{completedTasks.length}/{TASKS.length}</span>
           </div>
@@ -1177,6 +1181,22 @@ export default function App() {
         }
         .back-btn:active { transform: scale(0.96); }
         .back-btn:hover { background: rgba(255,255,255,0.09); color: #ccc; }
+
+        .reset-header-btn {
+          background: rgba(239,68,68,0.08);
+          color: #f87171;
+          border: 1px solid rgba(239,68,68,0.25);
+          border-radius: 10px;
+          padding: 0.45rem 0.8rem;
+          font-family: var(--sans);
+          font-size: 0.72rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s;
+          min-height: 36px;
+        }
+        .reset-header-btn:hover { background: rgba(239,68,68,0.18); color: #fca5a5; }
+        .reset-header-btn:active { transform: scale(0.96); }
 
         /* ══════════════════════════════════════
            MAIN CONTENT
