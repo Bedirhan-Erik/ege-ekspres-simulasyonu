@@ -43,43 +43,15 @@ const caesarDecrypt = (text, shift) =>
 
 // ─── TASK DATA ───
 const TASKS = [
-  {
+   {
     id: 1,
-    title: "Haber Simülasyonu",
-    subtitle: "Ege'de Amansız Hastalığa Çözüm",
-    icon: "📰",
-    startTime: "11:00",
-    endTime: "12:00",
-    startHour: 11,
-    endHour: 12,
-    location: "Hipokrat Kafe",
-    locationEncrypted: null, // will be set with puzzle
-    locationPuzzle: {
-      type: "caesar",
-      shift: 1,
-      hint: "Her harfi alfabede 1 adım geri al",
-    },
-    tasks: [
-      "Haber metnini hazırla",
-      "Haber fotoğraf ve videoları yüklenecek",
-      "Mizanpaj tasarımını oluştur",
-      "Haberi küpür formuna dönüştür",
-      "Haber dijital arşivine yükle",
-    ],
-    driveLink: "https://drive.google.com/drive/u/0/folders/1oEzKLeVI1wua6Mbkg6temMXOmmOWpQOc?usp=sharing",
-    mapLink: "https://www.google.com/maps/place/Hipokrat+Coffee+Plus/@38.4572938,27.2097014,21z/data=!4m14!1m7!3m6!1s0x14b97d84a24426d5:0x9c06f703883d2992!2sHipokrat+Cafe!8m2!3d38.4562371!4d27.228094!16s%2Fg%2F11kqb_xj_9!3m5!1s0x14b97d001accb5a9:0x6feddcb2c4e7443e!8m2!3d38.4573297!4d27.2096761!16s%2Fg%2F11xkrn4nr0?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D",
-    color: "#3B82F6",
-    qrCode: "11114380",
-  },
-  {
-    id: 2,
     title: "Kaza Haberi",
     subtitle: "Motor veya Araba Kazası",
     icon: "🚨",
-    startTime: "12:00",
-    endTime: "13:00",
-    startHour: 12,
-    endHour: 13,
+    startTime: "13:30",
+    endTime: "14:30",
+    startHour: 13,
+    endHour: 14,
     location: "Ege Meslek Yüksekokulu",
     locationEncrypted: null,
     locationPuzzle: {
@@ -93,20 +65,20 @@ const TASKS = [
       "Mağdur ve tanık ifadelerini kaydet",
       "Kaza haberi metnini yaz",
     ],
-    driveLink: "https://drive.google.com/drive/u/0/folders/1nHTTas0_7r-0J6bfpDNtfx_6NmHJ_4dt?usp=sharing",
+    driveLink: "https://drive.google.com/drive/folders/1cUS264_cBMdU8TJqPhUpvxw5pR-nG5Ed?usp=drive_link",
     mapLink: "https://www.google.com/maps/search/?api=1&query=Ege+Meslek+Yüksekokulu+Bornova+İzmir",
     color: "#6366F1",
     qrCode: "22223162",
   },
-  {
-    id: 3,
+    {
+    id: 2,
     title: "Sokak Röportajı",
     subtitle: "Halkın Nabzını Tut",
     icon: "🎤",
-    startTime: "13:00",
-    endTime: "14:00",
-    startHour: 13,
-    endHour: 14,
+    startTime: "14:30",
+    endTime: "15:30",
+    startHour: 14,
+    endHour: 15,
     location: "Ege Çarşı / Migros",
     locationEncrypted: null,
     locationPuzzle: {
@@ -120,47 +92,46 @@ const TASKS = [
       "Röportaj görüntülerini düzenle",
       "Sokak röportajı haberini hazırla",
     ],
-    driveLink: "https://drive.google.com/drive/folders/16bpRd9bHt2Ys1vvLIoUS1T2yU2M9eoOJ?usp=sharing",
+    driveLink: "https://drive.google.com/drive/folders/1tlVOlBzN8W_JyiX7xy1bhSgPZZWPdAWp?usp=drive_link",
     mapLink: "https://www.google.com/maps/place/Migros/@38.4574643,27.2306784,19z/data=!4m10!1m2!2m1!1zRWdlIMOcbml2ZXJzaXRlc2kgw4dhcsWfxLEgTWlncm9zIEJvcm5vdmEgxLB6bWly!3m6!1s0x14b97dd17bc766e9:0xa7f532bb7700b0d8!8m2!3d38.4574766!4d27.2312839!15sCjBFZ2Ugw5xuaXZlcnNpdGVzaSDDh2FyxZ_EsSBNaWdyb3MgQm9ybm92YSDEsHptaXIiA4gBAVoxIi9lZ2Ugw7xuaXZlcnNpdGVzaSDDp2FyxZ_EsSBtaWdyb3MgYm9ybm92YSBpem1pcpIBC3N1cGVybWFya2V0mgEjQ2haRFNVaE5NRzluUzBWSk5ubHpXbTFtTWpRM2RVTlJFQUXgAQD6AQQIABAy!16s%2Fg%2F11s69s_5gw?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D",
     color: "#06B6D4",
     qrCode: "33331621",
   },
   {
-    id: 4,
-    title: "Fen Saha Röportajı",
-    subtitle: "Şampiyonluk Kutlaması",
-    icon: "⚽",
-    startTime: "15:00",
-    endTime: "16:00",
-    startHour: 15,
-    endHour: 16,
-    location: "Fen Fakültesi Futbol Sahası",
-    locationEncrypted: null,
+    id: 3,
+    title: "TDGT Zirvesi Çekimi",
+    subtitle: "Türk Dünyası Gençlik ve Kültür Zirvesi",
+    icon: "📰",
+    startTime: "16:00",
+    endTime: "17:00",
+    startHour: 16,
+    endHour: 17,
+    location: "Mötbe",
+    locationEncrypted: null, // will be set with puzzle
     locationPuzzle: {
-      type: "vowels",
-      hint: "Boşlukları doğru tamamla",
+      type: "caesar",
+      shift: 1,
+      hint: "Her harfi alfabede 1 adım geri al",
     },
     tasks: [
-      "Maç öncesi röportajları yap",
-      "Maç sonu röportajları yap",
-      "Taraftar röportajları kaydet",
-      "Maç içi görüntüleri çek",
-      "Maç sonu fotoğraflarını çek",
-      "Haber metni yaz",
-      "Instagram tasarımını oluştur",
+      "İSO hassasiyeti uygulayarak etkinlik fotoğraflarını çek",
+      "En az 3 farklı kişi ile etkinlik öncesi ve sonrasında röportaj yap",
+      "Etkinlik akışı ile ilgili reels videosu hazırla",
+      "Zirve haberini yaz",
     ],
-    driveLink: "https://drive.google.com/drive/folders/1f7r_OL6ImsjI6exRi3pfo5BmReWGHx3n?usp=sharing",
-    mapLink: "https://www.google.com/maps/place/Fulbol+Sahas%C4%B1/@38.4599287,27.2280284,18z/data=!4m10!1m2!2m1!1sEge+%C3%9Cniversitesi+Fen+Fak%C3%BCltesi+Futbol+Sahas%C4%B1+Bornova+%C4%B0zmir!3m6!1s0x14b97cdb1340a2c9:0x1d48fcbb7206dff0!8m2!3d38.4599288!4d27.2304102!15sCj5FZ2Ugw5xuaXZlcnNpdGVzaSBGZW4gRmFrw7xsdGVzaSBGdXRib2wgU2FoYXPEsSBCb3Jub3ZhIMSwem1pciIDiAEBWj8iPWVnZSDDvG5pdmVyc2l0ZXNpIGZlbiBmYWvDvGx0ZXNpIGZ1dGJvbCBzYWhhc8SxIGJvcm5vdmEgaXptaXKSAQ5mb290YmFsbF9maWVsZJoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyNUNOVlp1Ums1aWJVNDJaVzEwUjFreFNYZE9iRlpvVlZSU2ExWllZeEFC4AEA-gEECAAQHQ!16s%2Fg%2F11dz566tmr?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D",
-    color: "#8B5CF6",
-    qrCode: "44442035",
+    driveLink: "https://drive.google.com/drive/folders/1WfN5M9tAEnT8PU7YaS_wSy-RY_dwHB4C?usp=drive_link",
+    mapLink: "https://maps.app.goo.gl/7XD8wmrYdSpFpcKC9?g_st=ic",
+    color: "#3B82F6",
+    qrCode: "11114380",
   },
+ 
 ];
 
 // Initialize encrypted locations
-TASKS[0].locationEncrypted = caesarEncrypt(TASKS[0].location, 1);
-TASKS[1].locationEncrypted = "Kampüsün saklı incisi";
-TASKS[2].locationEncrypted = "EGE ŞIRAÇ / OGRISM ";
-TASKS[3].locationEncrypted = "F_n F_k_lt_s_ F_tb_l S_h_s_";
+TASKS[0].locationEncrypted = "Kampüsün saklı incisi";
+TASKS[1].locationEncrypted = "EGE ŞIRAÇ / OGRISM ";
+TASKS[2].locationEncrypted = caesarEncrypt(TASKS[2].location, 1);
+
 
 // ─── COMPONENTS ───
 
