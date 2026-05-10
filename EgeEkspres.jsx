@@ -135,6 +135,37 @@ TASKS[2].locationEncrypted = caesarEncrypt(TASKS[2].location, 1);
 
 // ─── COMPONENTS ───
 
+const EgeLogo = ({ style, className, id = "ege" }) => (
+  <svg
+    viewBox="0 0 150 160"
+    xmlns="http://www.w3.org/2000/svg"
+    style={style}
+    className={className}
+    fill="none"
+  >
+    <defs>
+      <linearGradient id={`${id}T`} x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stopColor="#1A3A8A" />
+        <stop offset="100%" stopColor="#2563EB" />
+      </linearGradient>
+      <linearGradient id={`${id}M`} x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stopColor="#2563EB" />
+        <stop offset="100%" stopColor="#3B82F6" />
+      </linearGradient>
+      <linearGradient id={`${id}B`} x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stopColor="#06B6D4" />
+        <stop offset="100%" stopColor="#7EF0FF" />
+      </linearGradient>
+    </defs>
+    {/* Top bar — with bottom-left tab (E top stroke + spine) */}
+    <polygon points="28,17 132,5 132,27 28,39 28,53 10,55 10,41" fill={`url(#${id}T)`} />
+    {/* Middle bar — full parallelogram */}
+    <polygon points="10,75 132,61 132,83 10,97" fill={`url(#${id}M)`} />
+    {/* Bottom bar — with top-left tab (E bottom stroke + spine) */}
+    <polygon points="10,113 28,125 132,113 132,135 28,147 10,149 10,127" fill={`url(#${id}B)`} />
+  </svg>
+);
+
 const Particles = () => {
   const particles = Array.from({ length: 20 }, (_, i) => ({
     id: i,
@@ -749,7 +780,7 @@ export default function App() {
           <Particles />
           <div className="entry-content">
             <div className="logo-section">
-              <div className="logo-icon">📰</div>
+              <EgeLogo className="logo-icon" id="entry" />
               <h1 className="logo-title">EGE EKSPRES</h1>
               <p className="logo-subtitle">Haber Simülasyonu</p>
               <div className="logo-line" />
@@ -800,7 +831,7 @@ export default function App() {
 
       <header className="app-header">
         <div className="header-left">
-          <span className="header-logo">📰</span>
+          <EgeLogo className="header-logo" id="header" />
           <div>
             <h1>EGE EKSPRES</h1>
             <p className="header-team">{teamName}</p>
