@@ -99,8 +99,8 @@ const TASKS = [
   },
   {
     id: 3,
-    title: "TDGT Zirvesi Çekimi",
-    subtitle: "Türk Dünyası Gençlik ve Kültür Zirvesi",
+    title: "Etkinlik Çekimi",
+    subtitle: "Etkinlik çekimi",
     icon: "📰",
     startTime: "16:00",
     endTime: "17:00",
@@ -763,6 +763,7 @@ export default function App() {
   };
 
   const handleReset = () => {
+    setEntered(false);
     setSolvedLocations([]);
     setVerifiedQRs([]);
     setCompletedTasks([]);
@@ -839,7 +840,7 @@ export default function App() {
         </div>
         <div className="header-right">
           <button className="back-btn" onClick={() => setEntered(false)}>← Geri</button>
-          <button className="reset-header-btn" onClick={() => { if (window.confirm("Oyunu sıfırlamak istediğinden emin misin?")) handleReset(); }}>↺ Sıfırla</button>
+          <button className="reset-header-btn" onClick={handleReset}>↺ Sıfırla</button>
           <div className="progress-ring">
             <span>{completedTasks.length}/{TASKS.length}</span>
           </div>
